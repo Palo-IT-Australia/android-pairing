@@ -1,6 +1,6 @@
 package com.paloit.coin.platform.api
 
-import com.paloit.coin.platform.api.data.BpiCurrenciesResponse
+import com.paloit.coin.platform.api.data.BpiCurrenciesResponseItem
 import com.paloit.coin.platform.api.data.BpiCurrentPriceResponse
 import retrofit2.http.GET
 
@@ -14,7 +14,7 @@ interface BpiApi {
     suspend fun getBitcoinCurrentPrice(): BpiCurrentPriceResponse
 
     @GET("supported-currencies.json")
-    suspend fun getSupportedCurrencies(): BpiCurrenciesResponse
+    suspend fun getSupportedCurrencies(): List<BpiCurrenciesResponseItem>
 
     @GET("currentprice/{code}.json")
     suspend fun getBitcoinCurrentPriceInCurrency(code: String): BpiCurrentPriceResponse
