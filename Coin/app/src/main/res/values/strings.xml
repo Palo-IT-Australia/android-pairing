@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Palo IT - Coin</string>
+
+    <!-- Bottom Nav Menu -->
+    <string name="nav_bottom_bar_home">Home</string>
+    <string name="nav_bottom_bar_list">List</string>
 </resources>
