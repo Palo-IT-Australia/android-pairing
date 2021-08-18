@@ -77,9 +77,8 @@ fun AppNavHost(
     NavHost(navController = navController, startDestination = Screens.BitcoinPage.route) {
         composable(Screens.BitcoinPage.route) {
             BitcoinScreen(
-                viewModel = viewModel,
                 uiState = uiState
-            )
+            ) { viewModel.refreshBitcoinPrice() }
         }
         composable(Screens.ListPage.route) { ListScreen() }
     }

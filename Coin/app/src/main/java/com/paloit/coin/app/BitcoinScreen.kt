@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.paloit.coin.R
 
 @Composable
-fun BitcoinScreen(viewModel: MainActivityViewModel, uiState: MainActivityUiState) {
+fun BitcoinScreen(uiState: MainActivityUiState, onRefreshClicked: () -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -23,7 +23,7 @@ fun BitcoinScreen(viewModel: MainActivityViewModel, uiState: MainActivityUiState
             BitcoinPrice(
                 isLoading = uiState.isBitcoinPriceLoading,
                 price = uiState.bitcoinPrice
-            ) { viewModel.refreshBitcoinPrice() }
+            ) { onRefreshClicked() }
         }
     }
 }
