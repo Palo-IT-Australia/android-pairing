@@ -50,7 +50,7 @@ fun BitcoinPrice(isLoading: Boolean, price: String, onRefreshClicked: () -> Unit
         }
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "$price",
+            text = price,
             color = MaterialTheme.colors.primary,
             style = MaterialTheme.typography.caption
         )

@@ -26,7 +26,7 @@ class MainActivityViewModel @Inject constructor(
 
     fun refreshBitcoinPrice() {
         viewModelScope.launch {
-            _uiState.postValue(MainActivityUiState(true, _uiState?.value?.bitcoinPrice ?: ""))
+            _uiState.postValue(MainActivityUiState(true, _uiState.value?.bitcoinPrice ?: ""))
             withContext(iODispatcher) {
                 val price = pricingRepository.getBitCoinPrice()
                 _uiState.postValue(MainActivityUiState(false, price.rate))
