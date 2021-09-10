@@ -30,7 +30,6 @@ class MainActivityViewModelWithRuleTest {
             whenever(pricingRepository.getBitCoinPrice()).thenReturn(Price("12.56"))
         }
         viewModel = MainActivityViewModel(pricingRepository, Dispatchers.Main)
-        viewModel.uiState.observeForever { }
     }
 
     @Test
