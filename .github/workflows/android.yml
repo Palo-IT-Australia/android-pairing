@@ -20,5 +20,7 @@ jobs:
         distribution: 'adopt'
         cache: gradle
 
+    - name: Go to Coin folder
+      run: cd Coin/
     - name: Build with Gradle
       run: ./gradlew build
