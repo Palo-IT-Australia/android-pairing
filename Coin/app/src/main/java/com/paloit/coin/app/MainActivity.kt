@@ -11,7 +11,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -88,7 +87,7 @@ fun AppNavHost(navController: NavHostController) {
         }
         composable(Screens.ListPage.route) {
             val currenciesUiState by hiltViewModel<CurrenciesViewModel>().uiState.collectAsState()
-            ListScreen(currenciesUiState)
+            ListScreen(currenciesUiState) { }
         }
     }
 }

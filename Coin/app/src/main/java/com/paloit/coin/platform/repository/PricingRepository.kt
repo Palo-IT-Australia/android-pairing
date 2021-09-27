@@ -12,7 +12,5 @@ interface PricingRepository {
 class PricingRepositoryImpl @Inject constructor(
     private val bpiApi: BpiApi
 ) : PricingRepository {
-    override suspend fun getBitCoinPrice(): Price {
-        return bpiApi.getBitcoinCurrentPrice().mapToDomain()
-    }
+    override suspend fun getBitCoinPrice(): Price = bpiApi.getBitcoinCurrentPrice().mapToDomain()
 }

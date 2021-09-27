@@ -14,6 +14,4 @@ fun BpiCurrentPriceResponse.mapToDomain(): Price {
     }
 }
 
-fun BpiCurrenciesResponseItem.mapToDomain(): Currency {
-    return Currency(country, currency)
-}
+fun BpiCurrenciesResponseItem.mapToDomain(): Currency = Currency(country, currency)

@@ -7,6 +7,25 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.paloit.coin.R
 
+sealed class Routes(
+    val route: String
+) {
+    object BitcoinRoute :
+        Routes(
+            "bitcoin"
+        )
+
+    object CurrenciesRoute :
+        Routes(
+            "list"
+        )
+
+    object BitcoinCurrencyRoute :
+        Routes(
+            "bitcoinCurrency"
+        )
+}
+
 sealed class Screens(
     val route: String,
     @StringRes val resourceId: Int,
@@ -15,7 +34,7 @@ sealed class Screens(
 ) {
     object BitcoinPage :
         Screens(
-            "bitcoin",
+            Routes.BitcoinRoute.route,
             R.string.nav_bottom_bar_home,
             Icons.Default.Home,
             R.string.nav_bottom_bar_home
@@ -23,7 +42,7 @@ sealed class Screens(
 
     object ListPage :
         Screens(
-            "list",
+            Routes.CurrenciesRoute.route,
             R.string.nav_bottom_bar_list,
             Icons.Default.List,
             R.string.nav_bottom_bar_list

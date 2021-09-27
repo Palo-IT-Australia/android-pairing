@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paloit.coin.app.bitcoinPrice.BitcoinPriceUiState
 import com.paloit.coin.di.IoDispatcher
 import com.paloit.coin.platform.repository.PricingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

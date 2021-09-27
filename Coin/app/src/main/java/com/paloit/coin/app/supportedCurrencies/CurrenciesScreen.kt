@@ -9,14 +9,15 @@ import androidx.compose.material.icons.filled.NavigateNext
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.paloit.coin.R
 import com.paloit.coin.app.LoadingIndicator
 import com.paloit.coin.platform.repository.data.Currency
 
 @ExperimentalMaterialApi
 @Composable
-fun ListScreen(uiState: CurrenciesUiState) {
+fun ListScreen(uiState: CurrenciesUiState, onClick: () -> Unit) {
 
     if (uiState.isListLoading) {
         LoadingIndicator()
@@ -27,21 +28,21 @@ fun ListScreen(uiState: CurrenciesUiState) {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
-        CurrenciesList(uiState.itemsList)
+        CurrenciesList(uiState.itemsList, onClick)
     }
 }
 
 @Composable
-fun CurrenciesList(items: List<Currency>) {
-    LazyColumn(contentPadding = PaddingValues(start = 8.dp)) {
+fun CurrenciesList(items: List<Currency>, onClick: () -> Unit) {
+    LazyColumn(contentPadding = PaddingValues(start = dimensionResource(id = R.dimen.list_start_padding))) {
         items(items = items) { item ->
-            ListItem(item)
+            ListItem(item, onClick)
         }
     }
 }
 
 @Composable
-fun ListItem(item: Currency) {
+fun ListItem(item: Currency, onClick: () -> Unit) {
     Row(
         modifier = Modifier.fillMaxSize(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -49,7 +50,7 @@ fun ListItem(item: Currency) {
     ) {
         Text(item.currency)
         Text(item.country)
-        IconButton(onClick = { }) {
+        IconButton(onClick = onClick) {
             Icon(
                 Icons.Filled.NavigateNext,
                 null
@@ -67,5 +68,5 @@ fun ListScreenPreview() {
         Currency("USA", "USD"),
         Currency("United Kingdom", "GBP")
     )
-    ListScreen(CurrenciesUiState(false, currencies))
+    ListScreen(CurrenciesUiState(false, currencies)) {}
 }
