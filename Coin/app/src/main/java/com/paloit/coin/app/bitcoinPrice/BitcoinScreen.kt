@@ -1,4 +1,4 @@
-package com.paloit.coin.app
+package com.paloit.coin.app.bitcoinPrice
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.paloit.coin.R
 
 @Composable
-fun BitcoinScreen(uiState: MainActivityUiState, onRefreshClicked: () -> Unit) {
+fun BitcoinScreen(uiState: BitcoinPriceUiState, onRefreshClicked: () -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
             modifier = Modifier.fillMaxSize(),

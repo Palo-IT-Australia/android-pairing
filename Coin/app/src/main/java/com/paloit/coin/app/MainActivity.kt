@@ -5,10 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -16,6 +18,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.paloit.coin.app.bitcoinPrice.BitcoinPrice
+import com.paloit.coin.app.bitcoinPrice.BitcoinPriceUiState
+import com.paloit.coin.app.bitcoinPrice.BitcoinScreen
+import com.paloit.coin.app.bitcoinPrice.BitcoinViewModel
+import com.paloit.coin.app.supportedCurrencies.CurrenciesViewModel
+import com.paloit.coin.app.supportedCurrencies.ListScreen
 import com.paloit.coin.ui.theme.CoinTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,16 +36,14 @@ class MainActivity : ComponentActivity() {
         val items = listOf(Screens.BitcoinPage, Screens.ListPage)
 
         setContent {
-            val viewModel: MainActivityViewModel = viewModel()
             val navController = rememberNavController()
-            val uiState by viewModel.uiState.observeAsState(MainActivityUiState(false, ""))
 
             CoinTheme {
                 // A surface container using the 'background' color from the theme
                 Scaffold(bottomBar = {
                     AppBottomNavBar(items = items, navController)
                 }) {
-                    AppNavHost(navController = navController, viewModel, uiState)
+                    AppNavHost(navController = navController)
                 }
             }
         }
@@ -69,18 +75,21 @@ fun AppBottomNavBar(items: List<Screens>, navController: NavController) {
 
 @ExperimentalMaterialApi
 @Composable
-fun AppNavHost(
-    navController: NavHostController,
-    viewModel: MainActivityViewModel,
-    uiState: MainActivityUiState
-) {
+fun AppNavHost(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screens.BitcoinPage.route) {
         composable(Screens.BitcoinPage.route) {
+            val bitcoinViewModel = hiltViewModel<BitcoinViewModel>()
+            val bitcoinUiState by bitcoinViewModel.uiState.observeAsState(
+                BitcoinPriceUiState(false, "")
+            )
             BitcoinScreen(
-                uiState = uiState
-            ) { viewModel.refreshBitcoinPrice() }
+                uiState = bitcoinUiState
+            ) { bitcoinViewModel.refreshBitcoinPrice() }
         }
-        composable(Screens.ListPage.route) { ListScreen() }
+        composable(Screens.ListPage.route) {
+            val currenciesUiState by hiltViewModel<CurrenciesViewModel>().uiState.collectAsState()
+            ListScreen(currenciesUiState)
+        }
     }
 }
 
