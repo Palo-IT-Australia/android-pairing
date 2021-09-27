@@ -22,5 +22,7 @@ jobs:
 
     - name: Go to Coin folder
       run: cd Coin/
+    - name: check folder contents
+      run: ls -l
     - name: Build with Gradle
       run: ./gradlew build
