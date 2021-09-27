@@ -20,9 +20,6 @@ jobs:
         distribution: 'adopt'
         cache: gradle
 
-    - name: check folder contents
-      run: ls -l
-    - name: Go to Coin folder
-      run: cd Coin/
     - name: Build with Gradle
+      working-directory: ./Coin
       run: ./gradlew build
