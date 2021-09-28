@@ -1,4 +1,4 @@
-package com.paloit.coin.app
+package com.paloit.coin.app.bitcoinPrice
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -6,12 +6,13 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import com.paloit.coin.R
 
 @Composable
-fun BitcoinScreen(uiState: MainActivityUiState, onRefreshClicked: () -> Unit) {
+fun BitcoinScreen(uiState: BitcoinPriceUiState, onRefreshClicked: () -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -19,7 +20,7 @@ fun BitcoinScreen(uiState: MainActivityUiState, onRefreshClicked: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Sponsor()
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_height_full)))
             BitcoinPrice(
                 isLoading = uiState.isBitcoinPriceLoading,
                 price = uiState.bitcoinPrice
@@ -42,21 +43,21 @@ fun BitcoinPrice(isLoading: Boolean, price: String, onRefreshClicked: () -> Unit
         Box(contentAlignment = Alignment.Center) {
             Image(
                 painter = painterResource(id = R.drawable.ic_bitcoin_cute),
-                contentDescription = "Bitcoin icon"
+                contentDescription = stringResource(id = R.string.icon_bitcoin_description)
             )
             if (isLoading) {
                 CircularProgressIndicator()
             }
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_height_half)))
         Text(
             text = price,
             color = MaterialTheme.colors.primary,
             style = MaterialTheme.typography.caption
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_height_half)))
         Button(onClick = onRefreshClicked) {
-            Text("Refresh")
+            Text(stringResource(id = R.string.button_refresh))
         }
     }
 }

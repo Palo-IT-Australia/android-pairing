@@ -2,6 +2,8 @@ package com.paloit.coin.app
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.paloit.coin.MainCoroutineRule
+import com.paloit.coin.app.bitcoinPrice.BitcoinPriceUiState
+import com.paloit.coin.app.bitcoinPrice.BitcoinViewModel
 import com.paloit.coin.platform.repository.PricingRepository
 import com.paloit.coin.platform.repository.data.Price
 import kotlinx.coroutines.Dispatchers
@@ -18,10 +20,10 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
-class MainActivityViewModelTest {
+class BitcoinViewModelTest {
     private val testDispatcher = TestCoroutineDispatcher()
 
-    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var viewModel: BitcoinViewModel
     private lateinit var pricingRepository: PricingRepository
 
     @get:Rule
@@ -37,7 +39,7 @@ class MainActivityViewModelTest {
         testDispatcher.runBlockingTest {
             whenever(pricingRepository.getBitCoinPrice()).thenReturn(Price("12.56"))
         }
-        viewModel = MainActivityViewModel(pricingRepository, testDispatcher)
+        viewModel = BitcoinViewModel(pricingRepository, testDispatcher)
     }
 
     @After
@@ -51,6 +53,6 @@ class MainActivityViewModelTest {
         testDispatcher.runBlockingTest {
             viewModel.refreshBitcoinPrice()
         }
-        assert(viewModel.uiState.value == MainActivityUiState(false, "12.56"))
+        assert(viewModel.uiState.value == BitcoinPriceUiState(false, "12.56"))
     }
 }
