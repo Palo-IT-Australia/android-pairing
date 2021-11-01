@@ -92,7 +92,7 @@ dependencies {
     implementation('androidx.hilt:hilt-navigation-compose:1.0.0-alpha03')
 
     // Coroutines
-    def coroutinesVersion = '1.5.2-native-mt'
+    def coroutinesVersion = '1.5.2'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
@@ -108,5 +108,5 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
     // Mockito
-    testImplementation "org.mockito.kotlin:mockito-kotlin:3.2.0"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
 }
