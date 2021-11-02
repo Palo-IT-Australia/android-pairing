@@ -3,6 +3,7 @@ package com.paloit.coin.platform.repository
 import com.paloit.coin.MainCoroutineRule
 import com.paloit.coin.platform.api.BpiApi
 import com.paloit.coin.platform.api.data.BpiCurrenciesResponseItem
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -22,7 +23,7 @@ class CurrenciesRepositoryImplTest {
 
     @Before
     fun setUp() {
-        currenciesRepository = CurrenciesRepositoryImpl(bpiApi)
+        currenciesRepository = CurrenciesRepositoryImpl(bpiApi, Dispatchers.Main)
     }
 
     @Test
