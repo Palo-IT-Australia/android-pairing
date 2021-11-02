@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.paloit.coin.MainCoroutineRule
 import com.paloit.coin.platform.repository.CurrenciesRepository
 import com.paloit.coin.platform.repository.data.Currency
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
