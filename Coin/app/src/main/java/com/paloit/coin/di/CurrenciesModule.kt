@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 @Module
@@ -14,7 +15,7 @@ import javax.inject.Singleton
 object CurrenciesModule {
     @Singleton
     @Provides
-    fun providePricingRepository(bpiApi: BpiApi): CurrenciesRepository {
-        return CurrenciesRepositoryImpl(bpiApi)
+    fun providePricingRepository(bpiApi: BpiApi, @IoDispatcher ioDispatcher: CoroutineDispatcher): CurrenciesRepository {
+        return CurrenciesRepositoryImpl(bpiApi, ioDispatcher)
     }
 }

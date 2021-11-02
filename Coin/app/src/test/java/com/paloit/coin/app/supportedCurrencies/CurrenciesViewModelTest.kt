@@ -1,5 +1,6 @@
 package com.paloit.coin.app.supportedCurrencies
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.paloit.coin.MainCoroutineRule
 import com.paloit.coin.platform.repository.CurrenciesRepository
 import com.paloit.coin.platform.repository.data.Currency
@@ -20,9 +21,12 @@ class CurrenciesViewModelTest {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
+    @get:Rule
+    var instantExecutorRule = InstantTaskExecutorRule()
+
     @Before
     fun setUp() {
-        viewModel = CurrenciesViewModel(currenciesRepository, Dispatchers.Main)
+        viewModel = CurrenciesViewModel(currenciesRepository)
     }
 
     @Test
