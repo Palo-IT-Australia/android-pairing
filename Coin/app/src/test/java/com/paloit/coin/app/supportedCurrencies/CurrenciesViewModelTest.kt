@@ -26,17 +26,19 @@ class CurrenciesViewModelTest {
 
     @Before
     fun setUp() {
-        viewModel = CurrenciesViewModel(currenciesRepository)
-    }
-
-    @Test
-    fun `GIVEN the list of supported currencies contains Australia WHEN app fetches a list of supported currencies THEN ui state holds a list of supported currencies with Australia`() {
         mainCoroutineRule.runBlockingTest {
             whenever(currenciesRepository.getSupportedCurrencies()).thenReturn(
                 listOf(
                     Currency("Australia", "AUD")
                 )
             )
+        }
+        viewModel = CurrenciesViewModel(currenciesRepository)
+    }
+
+    @Test
+    fun `GIVEN the list of supported currencies contains Australia WHEN app fetches a list of supported currencies THEN ui state holds a list of supported currencies with Australia`() {
+        mainCoroutineRule.runBlockingTest {
             viewModel.fetchSupportedCurrencies()
             assert(viewModel.uiState.value.itemsList[0].country == "Australia")
         }
