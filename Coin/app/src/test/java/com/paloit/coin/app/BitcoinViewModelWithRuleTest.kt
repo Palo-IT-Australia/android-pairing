@@ -1,7 +1,7 @@
 package com.paloit.coin.app
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.paloit.coin.MainCoroutineRule
+import com.paloit.coin.core.rules.MainCoroutineRule
 import com.paloit.coin.app.bitcoinPrice.BitcoinPriceUiState
 import com.paloit.coin.app.bitcoinPrice.BitcoinViewModel
 import com.paloit.coin.platform.repository.PricingRepository

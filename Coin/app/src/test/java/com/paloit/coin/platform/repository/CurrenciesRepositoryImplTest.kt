@@ -1,6 +1,6 @@
 package com.paloit.coin.platform.repository
 
-import com.paloit.coin.MainCoroutineRule
+import com.paloit.coin.core.rules.MainCoroutineRule
 import com.paloit.coin.platform.api.BpiApi
 import com.paloit.coin.platform.api.data.BpiCurrenciesResponseItem
 import kotlinx.coroutines.Dispatchers

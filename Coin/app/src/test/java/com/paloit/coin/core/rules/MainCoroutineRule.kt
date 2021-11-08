@@ -1,4 +1,4 @@
-package com.paloit.coin
+package com.paloit.coin.core.rules
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
