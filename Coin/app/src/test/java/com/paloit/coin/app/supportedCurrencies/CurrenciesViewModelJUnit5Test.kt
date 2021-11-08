@@ -4,10 +4,8 @@ import com.paloit.coin.core.extensions.CoroutinesTestExtension
 import com.paloit.coin.core.extensions.InstantExecutorExtension
 import com.paloit.coin.platform.repository.CurrenciesRepository
 import com.paloit.coin.platform.repository.data.Currency
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
