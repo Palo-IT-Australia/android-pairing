@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -12,7 +13,8 @@ import androidx.compose.ui.res.stringResource
 import com.paloit.coin.R
 
 @Composable
-fun BitcoinScreen(uiState: BitcoinPriceUiState, onRefreshClicked: () -> Unit) {
+fun BitcoinScreen(uiState: BitcoinPriceUiState, refreshPrice: () -> Unit) {
+    LaunchedEffect(key1 = uiState.bitcoinPrice) { refreshPrice() }
     Surface(color = MaterialTheme.colors.background) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -24,7 +26,7 @@ fun BitcoinScreen(uiState: BitcoinPriceUiState, onRefreshClicked: () -> Unit) {
             BitcoinPrice(
                 isLoading = uiState.isBitcoinPriceLoading,
                 price = uiState.bitcoinPrice
-            ) { onRefreshClicked() }
+            ) { refreshPrice() }
         }
     }
 }

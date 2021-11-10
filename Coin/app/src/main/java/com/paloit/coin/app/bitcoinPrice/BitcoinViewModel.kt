@@ -20,10 +20,6 @@ class BitcoinViewModel @Inject constructor(
     private val _uiState = MutableLiveData<BitcoinPriceUiState>()
     val uiState: LiveData<BitcoinPriceUiState> = _uiState
 
-    init {
-        refreshBitcoinPrice()
-    }
-
     fun refreshBitcoinPrice() {
         viewModelScope.launch {
             _uiState.postValue(BitcoinPriceUiState(true, _uiState.value?.bitcoinPrice ?: ""))

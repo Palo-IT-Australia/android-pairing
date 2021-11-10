@@ -16,10 +16,6 @@ class CurrenciesViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(CurrenciesUiState(false, listOf()))
     val uiState: StateFlow<CurrenciesUiState> = _uiState
 
-    init {
-        fetchSupportedCurrencies()
-    }
-
     fun fetchSupportedCurrencies() {
         viewModelScope.launch {
             _uiState.value = CurrenciesUiState(true, uiState.value.itemsList)

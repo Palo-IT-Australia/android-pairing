@@ -7,6 +7,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.NavigateNext
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -17,7 +18,9 @@ import com.paloit.coin.platform.repository.data.Currency
 
 @ExperimentalMaterialApi
 @Composable
-fun ListScreen(uiState: CurrenciesUiState, onClick: () -> Unit) {
+fun ListScreen(uiState: CurrenciesUiState, onClick: () -> Unit, loadList: () -> Unit) {
+
+    LaunchedEffect(key1 = uiState.itemsList) { loadList() }
 
     if (uiState.isListLoading) {
         LoadingIndicator()
@@ -68,5 +71,5 @@ fun ListScreenPreview() {
         Currency("USA", "USD"),
         Currency("United Kingdom", "GBP")
     )
-    ListScreen(CurrenciesUiState(false, currencies)) {}
+    ListScreen(CurrenciesUiState(false, currencies), {}) {}
 }

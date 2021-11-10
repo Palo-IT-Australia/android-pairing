@@ -86,8 +86,9 @@ fun AppNavHost(navController: NavHostController) {
             ) { bitcoinViewModel.refreshBitcoinPrice() }
         }
         composable(Screens.ListPage.route) {
-            val currenciesUiState by hiltViewModel<CurrenciesViewModel>().uiState.collectAsState()
-            ListScreen(currenciesUiState) { }
+            val currenciesViewModel = hiltViewModel<CurrenciesViewModel>()
+            val currenciesUiState by currenciesViewModel.uiState.collectAsState()
+            ListScreen(currenciesUiState, {}){ currenciesViewModel.fetchSupportedCurrencies()}
         }
     }
 }
