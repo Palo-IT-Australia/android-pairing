@@ -15,9 +15,6 @@ class CoroutinesTestExtension(
     private val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
 ) : BeforeEachCallback, AfterEachCallback, TestCoroutineScope by TestCoroutineScope(dispatcher) {
 
-    /**
-     * Set TestCoroutine dispatcher as main
-     */
     override fun beforeEach(context: ExtensionContext?) {
         Dispatchers.setMain(dispatcher)
     }
