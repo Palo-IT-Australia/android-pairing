@@ -2,16 +2,11 @@ package com.paloit.coin.app.bitcoinPrice
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.paloit.coin.core.rules.MainCoroutineRule
-import com.paloit.coin.app.bitcoinPrice.BitcoinPriceUiState
-import com.paloit.coin.app.bitcoinPrice.BitcoinViewModel
 import com.paloit.coin.platform.repository.PricingRepository
 import com.paloit.coin.platform.repository.data.Price
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
+import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -21,7 +16,7 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 class BitcoinViewModelTest {
-    private val testDispatcher = TestCoroutineDispatcher()
+    private val testDispatcher = StandardTestDispatcher()
 
     private lateinit var viewModel: BitcoinViewModel
     private lateinit var pricingRepository: PricingRepository
@@ -36,7 +31,7 @@ class BitcoinViewModelTest {
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
         pricingRepository = mock()
-        testDispatcher.runBlockingTest {
+        runTest {
             whenever(pricingRepository.getBitCoinPrice()).thenReturn(Price("12.56"))
         }
         viewModel = BitcoinViewModel(pricingRepository, testDispatcher)
@@ -45,12 +40,11 @@ class BitcoinViewModelTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
     }
 
     @Test
     fun `GIVEN crypto currency has a set price WHEN app retrieves the price THEN return price object with price and false loading state`() {
-        testDispatcher.runBlockingTest {
+        runTest {
             viewModel.refreshBitcoinPrice()
         }
         assert(viewModel.uiState.value == BitcoinPriceUiState(false, "12.56"))

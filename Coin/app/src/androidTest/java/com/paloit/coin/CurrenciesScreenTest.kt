@@ -17,7 +17,7 @@ class CurrenciesScreenTest {
 
     @ExperimentalMaterialApi
     @Test
-    fun given_when_then() {
+    fun given_app_on_currencies_screen_when_currencies_retrieved_successfully_then_return_list_of_currencies() {
         val uiState = CurrenciesUiState(
             false, listOf(
                 Currency("Australia", "AUD")

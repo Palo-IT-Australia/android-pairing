@@ -5,7 +5,7 @@ import com.paloit.coin.core.rules.MainCoroutineRule
 import com.paloit.coin.platform.repository.CurrenciesRepository
 import com.paloit.coin.platform.repository.data.Currency
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -24,7 +24,7 @@ class CurrenciesViewModelTest {
     var instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
-    fun setUp() = mainCoroutineRule.runBlockingTest {
+    fun setUp() = runTest {
         whenever(currenciesRepository.getSupportedCurrencies()).thenReturn(
             listOf(
                 Currency("Australia", "AUD")
@@ -35,7 +35,7 @@ class CurrenciesViewModelTest {
 
     @Test
     fun `GIVEN the list of supported currencies contains Australia WHEN app fetches a list of supported currencies THEN ui state holds a list of supported currencies with Australia`() =
-        mainCoroutineRule.runBlockingTest {
+        runTest {
             viewModel.fetchSupportedCurrencies()
             assert(viewModel.uiState.value.itemsList[0].country == "Australia")
         }

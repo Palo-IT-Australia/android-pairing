@@ -6,7 +6,7 @@ import com.paloit.coin.platform.repository.PricingRepository
 import com.paloit.coin.platform.repository.data.Price
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
@@ -23,14 +23,14 @@ internal class BitcoinViewModelJUnit5Test {
     private lateinit var viewModel: BitcoinViewModel
 
     @BeforeEach
-    fun setUp() = dispatcher.runBlockingTest {
+    fun setUp() = runTest {
         whenever(pricingRepository.getBitCoinPrice()).thenReturn(Price("12.56"))
         viewModel = BitcoinViewModel(pricingRepository, Dispatchers.Main)
     }
 
     @Test
     fun `GIVEN crypto currency has a set price WHEN app retrieves the price THEN return price object with price and false loading state`() =
-        dispatcher.runBlockingTest {
+        runTest {
             viewModel.refreshBitcoinPrice()
             assert(viewModel.uiState.value == BitcoinPriceUiState(false, "12.56"))
         }

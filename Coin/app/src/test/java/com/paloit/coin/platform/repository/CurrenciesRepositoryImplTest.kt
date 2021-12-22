@@ -5,7 +5,7 @@ import com.paloit.coin.platform.api.BpiApi
 import com.paloit.coin.platform.api.data.BpiCurrenciesResponseItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -31,7 +31,7 @@ class CurrenciesRepositoryImplTest {
         val currenciesList = listOf(
             BpiCurrenciesResponseItem("Australia", "AUD")
         )
-        mainCoroutineRule.runBlockingTest {
+        runTest {
             whenever(bpiApi.getSupportedCurrencies()).thenReturn(currenciesList)
             val result = currenciesRepository.getSupportedCurrencies()
             assert(result[0].country == currenciesList[0].country)

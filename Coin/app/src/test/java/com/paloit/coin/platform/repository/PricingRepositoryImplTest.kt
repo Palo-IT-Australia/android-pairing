@@ -6,7 +6,7 @@ import com.paloit.coin.platform.api.data.BpiCurrentPriceResponse
 import com.paloit.coin.platform.api.data.BpiPrice
 import com.paloit.coin.platform.api.data.BpiTime
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -30,7 +30,7 @@ class PricingRepositoryImplTest {
     @Test
     fun `GIVEN bitcoin price is known WHEN app successfully calls the BpiCurrentPrice endpoint THEN return the Price object`() {
         val bpiPrice = BpiPrice("USD", "Bitcoin", "15.39", 15.39, "USD")
-        mainCoroutineRule.runBlockingTest {
+        runTest {
             whenever(bpiApi.getBitcoinCurrentPrice()).thenReturn(
                 BpiCurrentPriceResponse(
                     mapOf("USD" to bpiPrice),
